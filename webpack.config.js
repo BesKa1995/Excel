@@ -1,10 +1,12 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// /** @type {import('webpack').Configuration} */
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const isProd = process.env.NODE_ENV === 'production'
 const isDev = !isProd
+
 
 const filename = ext => isProd ? `bundle.[hash].${ext}` : `bundle.${ext}`
 module.exports = {
@@ -22,6 +24,7 @@ module.exports = {
     }
   },
   devtool: isDev ? 'source-map' : false,
+
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
@@ -49,8 +52,8 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader",
-          "sass-loader",
+          'css-loader',
+          'sass-loader',
 
         ],
       },
@@ -58,7 +61,7 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env']
           }
@@ -67,11 +70,7 @@ module.exports = {
     ],
   },
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'public'),
-    },
-    compress: true,
-    port: 9000,
+    watchFiles:['./src']
   },
 }
 
