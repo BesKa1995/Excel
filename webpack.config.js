@@ -1,14 +1,13 @@
 // /** @type {import('webpack').Configuration} */
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const isProd = process.env.NODE_ENV === 'production'
 const isDev = !isProd
-
-
 const filename = ext => isProd ? `bundle.[hash].${ext}` : `bundle.${ext}`
+
 module.exports = {
 
   entry: './src/index.js',
@@ -70,7 +69,7 @@ module.exports = {
     ],
   },
   devServer: {
-    watchFiles:['./src']
+    watchFiles: ['./src']
   },
 }
 

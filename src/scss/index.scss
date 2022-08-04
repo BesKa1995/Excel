@@ -5,6 +5,7 @@
 @import 'toolbar';
 @import 'formula';
 @import 'table';
+@import 'dashboard.scss';
 
 * {
   padding: 0;
@@ -15,7 +16,6 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
-  color: #999;
 }
 
 
