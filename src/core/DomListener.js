@@ -12,9 +12,8 @@ export default class DomListener {
   initDOMListeners() {
     this.listeners.forEach((listener) => {
       const method = getMethodName(listener)
-      console.log(this)
       this[method] = this[method].bind(this)
-      console.log(this[method] === this[method].bind(this))
+
       if (!this[method]) {
         throw new Error(`Method '${method}' does not exist in ${this.name} Component`)
       }
