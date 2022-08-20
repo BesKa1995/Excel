@@ -11,6 +11,7 @@
   padding-bottom: 5px;
   user-select: none;
 
+
   .row {
     display: flex;
     flex-direction: row;
@@ -89,7 +90,6 @@
     right: 0;
 
     &:hover {
-      opacity: 1 !important;
       cursor: col-resize;
     }
 
@@ -103,8 +103,8 @@
     opacity: 0;
 
     &:hover {
-      opacity: 1;
       cursor: row-resize;
     }
   }
+
 }

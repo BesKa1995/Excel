@@ -1,5 +1,7 @@
 class Dom {
+
   constructor(selector) {
+
     this.$el = typeof selector === 'string'
       ? document.querySelector(selector)
       : selector
@@ -22,10 +24,18 @@ class Dom {
     this.$el.appendChild($el)
     return this
   }
+  text(txt) {
+    if (typeof txt === 'string') {
+      this.$el.textContent = txt
+      return this
+    }
 
+    return this.$el.textContent.trim()
+  }
   on(eventType, callback) {
     this.$el.addEventListener(eventType, callback)
   }
+
   off(eventType, callback) {
     this.$el.removeEventListener(eventType, callback)
   }
@@ -37,14 +47,48 @@ class Dom {
   getCoords() {
     return this.$el.getBoundingClientRect()
   }
+
   get data() {
     return this.$el.dataset
   }
+
+  find(selector) {
+    return $(this.$el.querySelector(selector))
+  }
+
+  focus() {
+    this.$el.focus()
+    return this
+  }
+
+  addClass(className) {
+    this.$el.classList.add(className)
+    return this
+  }
+
+  removeClass(className) {
+    this.$el.classList.remove(className)
+    return this
+  }
+
   findAll(selector) {
     return [...this.$el.querySelectorAll(selector)].map(el => {
       return $(el)
     })
   }
+
+  id(parse) {
+    if (parse) {
+      const parsed = this.id().split(':')
+      return {
+        row: Number(parsed[0]),
+        col: Number(parsed[1])
+      }
+    }
+
+    return this.data.id
+  }
+
   css(styles = {}) {
     Object
       .keys(styles)

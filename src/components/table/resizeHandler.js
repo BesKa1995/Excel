@@ -5,13 +5,15 @@ export function resizeHander($root, event) {
   const $parent = $resizer.closest('[data-type="resizable"]')
   const coords = $parent.getCoords()
   const cells = $root.findAll(`[data-col="${$parent.data.col}"]`)
-  const type = $resizer.data.resize
+  let type = $resizer.data.resize
   const sizeProp = type === 'col' ? 'bottom' : 'right'
+  const colWidth = 120
+  const rowHeight = 24
   let value
+
   $resizer.css({
     opacity: 1,
     [sizeProp]: '-50000px'
-
   })
 
   document.onmousemove = e => {
@@ -41,11 +43,12 @@ export function resizeHander($root, event) {
       bottom: 0
     })
   }
+
   document.ondblclick = e => {
-    if (type === 'col') {
-      cells.forEach(cell => cell.css({ width: this.colWidth + 'px' }))
-    } else {
-      $parent.css({ height: this.rowHeight + 'px' })
+    if (e.target.dataset.resize === 'col') {
+      cells.forEach(cell => cell.css({ width: colWidth + 'px' }))
+    } else if (e.target.dataset.resize === 'row') {
+      $parent.css({ height: rowHeight + 'px' })
     }
   }
 }
