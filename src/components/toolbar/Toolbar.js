@@ -1,52 +1,46 @@
-import { ExcelComponent } from "../../core/ExcelComponent"
+import { $ } from "../../core/dom"
+import { ExcelStateComponent } from "../../core/ExcelStateComponent"
+import { createToolbar } from "./toolbar.template"
+import { defaultStyles } from "../../constants"
 
-export class Toolbar extends ExcelComponent {
-  static className = 'excel__toolbar'
+export class Toolbar extends ExcelStateComponent {
+    static className = 'excel__toolbar'
 
-  constructor($root, options) {
-    super($root, {
-      name: 'Toolbar',
-      ...options
-    })
-  }
+    constructor($root, options) {
+        super($root, {
+            name: 'Toolbar',
+            listeners: ['click'],
+            subscribe: ['currentStyles'],
+            ...options
+        })
+    }
 
-  toHTML() {
-    return `
-    <div class="button">
-      <span class="material-icons">
-        format_align_left
-      </span>
-    </div>
+    onClick(event) {
+        const $target = $(event.target)
+        if ($target.data.type === 'button') {
+            const value = JSON.parse($target.data.value)
+            this.$emit('toolbar:applyStyle', value)
+            this.setState(value)
+        }
+    }
 
-    <div class="button">
-      <span class="material-icons">
-        format_align_center
-      </span>
-    </div>
+    storeChanged(changes) {
+        this.setState(changes.currentStyles)
+    }
 
-    <div class="button">
-      <span class="material-icons">
-        format_align_right
-      </span>
-    </div>
+    storeChanged(changes) {
+        this.setState(changes.currentStyles)
+    }
 
-    <div class="button">
-      <span class="material-icons">
-        format_bold
-      </span>
-    </div>
+    prepare() {
+        this.initState(defaultStyles)
+    }
 
-    <div class="button">
-      <span class="material-icons">
-        format_italic
-      </span>
-    </div>
+    get template() {
+        return createToolbar(this.state)
+    }
 
-    <div class="button">
-      <span class="material-icons">
-        format_underline
-      </span>
-    </div>
-    `
-  }
+    toHTML() {
+        return this.template
+    }
 }
