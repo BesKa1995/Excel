@@ -16,8 +16,13 @@ export function storage(key) {
         get() {
             return JSON.parse(localStorage.getItem(key))
         },
+
         set(data) {
             localStorage.setItem(key, JSON.stringify(data))
+        },
+
+        remove(key) {
+            localStorage.removeItem(key)
         }
     }
 }
@@ -39,7 +44,6 @@ export function toInlineStyles(styles = {}) {
         .join(';')
 }
 
-
 export function debounce(fn, wait) {
     let timout
     return function(...args) {
@@ -48,4 +52,19 @@ export function debounce(fn, wait) {
             fn.apply(this, args)
         }, wait)
     }
+}
+
+export function isValidSelector(selector) {
+    if (!selector || typeof selector !== 'string') {
+        throw new Error('Selector is not provided in the Router')
+    }
+}
+
+export function clone(obj) {
+    return JSON.parse(JSON.stringify(obj))
+}
+
+
+export function preventDefault(event) {
+    event.preventDefault()
 }

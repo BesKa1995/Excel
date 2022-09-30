@@ -6,4 +6,3 @@ export const defaultStyles = {
 }
 
 export const defaultTitle = 'New Title'
-
