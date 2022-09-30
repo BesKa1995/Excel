@@ -15,12 +15,17 @@ export class Formula extends ExcelComponent {
 
     toHTML() {
         return `
-            <div class="info">fx</div>
+            <div class="info">
+                fx
+            <div class="hint">=1+1</div>
+            </div>
             <div 
             id="formula" 
             class="input" 
-            contenteditable 
-           spellcheck="false"></div>
+            contenteditable
+            spellcheck="false"
+            placeholder="1231"
+           ></div>
         `
     }
 

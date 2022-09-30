@@ -1,9 +1,10 @@
 import { $ } from "../../core/dom"
 import { Emitter } from "../../core/Emitter"
 import { StoreSubscriber } from "../../core/StoreSubscriber"
+import { preventDefault } from "../../core/utils"
+import { updateDate } from "../../redux/actions"
 export class Excel {
-    constructor(selector, options) {
-        this.$el = document.querySelector(selector)
+    constructor(options) {
         this.components = options.components || []
         this.store = options.store
         this.emitter = new Emitter()
@@ -12,22 +13,28 @@ export class Excel {
 
     getRoot() {
         const $root = $.create('div', 'excel')
+
         this.components = this.components.map(Component => {
             const $el = $.create('div', Component.className)
             const options = {
                 emitter: this.emitter,
                 store: this.store
             }
+
             const component = new Component($el, options)
             $el.html(component.toHTML())
             $root.append($el)
             return component
         })
+
         return $root.$el
     }
 
-    render() {
-        this.$el.appendChild(this.getRoot())
+    init() {
+        if (process.env.NODE_ENV) {
+            document.addEventListener('contextmenu', preventDefault)
+        }
+        this.store.dispatch(updateDate())
         this.subscriber.subscribeComponents(this.components)
         this.components.forEach(component => component.init())
     }

@@ -1,3 +1,5 @@
+import { clone } from "./utils"
+
 export function createStore(rootReducer, initialState = {}) {
     let state = rootReducer(initialState, { type: '__INIT__' })
     let listeners = []
@@ -15,8 +17,8 @@ export function createStore(rootReducer, initialState = {}) {
             listeners.forEach(listener => listener(state))
         },
         getState() {
-            return JSON.parse(JSON.stringify(state))
-        }
+            return clone(state)
+        },
     }
 
 }

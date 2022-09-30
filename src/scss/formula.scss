@@ -1,33 +1,54 @@
 @import 'variables';
-@import 'mixin';
+@import 'mixins';
 
 
 .excel__formula {
-  position: absolute;
-  height: $formula-height;
-  top: $header-height + $toolbar-height;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid $border-color;
-
-  .info {
-    border-right: 1px solid $border-color;
-    font-style: italic;
+    position: absolute;
     height: $formula-height;
-    min-width: $info-cell-width;
-    text-align: center;
-    font-size: 18px;
+    top: $header-height + $toolbar-height;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $border-color;
 
-  }
+    .info {
+        border-right: 1px solid $border-color;
+        font-style: italic;
+        height: $formula-height;
+        min-width: $info-cell-width;
+        text-align: center;
+        font-size: 18px;
 
-  .input {
-    padding: 5px;
-    font-size: 12px;
-    outline: none;
-    height: 100%;
-    width: 100%;
-    color: black;
-  }
+        &:hover {
+            .hint {
+                top: 0;
+                opacity: 1;
+                left: $info-cell-width;
+            }
+        }
+    }
+
+    .input {
+        padding: 5px;
+        font-size: 12px;
+        outline: none;
+        height: 100%;
+        width: 100%;
+        color: black;
+    }
+}
+
+.hint {
+    padding: 0px 2px;
+    background-color: #eee;
+    color: #aaa;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+    position: absolute;
+    border-radius: 2px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 100;
+    transition: all .2s ease-in;
 }

@@ -3,23 +3,21 @@ const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
+const webpack = require('webpack')
 const isProd = process.env.NODE_ENV === 'production'
 const isDev = !isProd
 const filename = ext => isProd ? `bundle.[hash].${ext}` : `bundle.${ext}`
 
 module.exports = {
-
     entry: './src/index.js',
     output: {
         filename: filename('js'),
         path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
-        extensions: ['.js'],
         alias: {
-            '@': path.resolve(__dirname, 'src'),
-            '@core': path.resolve(__dirname, 'src/core')
-        }
+            dom: path.resolve(__dirname, 'src/core/dom.js'),
+        },
     },
     devtool: isDev ? 'source-map' : false,
 
@@ -42,6 +40,9 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: filename('css'),
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         })
     ],
     module: {

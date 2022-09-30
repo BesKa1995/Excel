@@ -5,7 +5,6 @@ import { createTable } from "./table.template"
 import { resizeHandler } from "./resizeHandler"
 import { defaultStyles } from '../../constants'
 import { applyStyle, changeStyles, changeText, tableResize } from "../../redux/actions"
-
 import {
     isCell,
     matrix,
@@ -41,7 +40,6 @@ export class Table extends ExcelComponent {
         super.init()
         const $cell = this.$root.find('[data-id="0:0"]')
         this.selectCell($cell)
-
         this.$on('formula:input', value => {
             this.selection.current
                 .attr('data-value', value)
@@ -66,13 +64,13 @@ export class Table extends ExcelComponent {
     selectCell($cell) {
         this.selection.select($cell)
         this.$emit('table:input', $cell)
-
         const styles = $cell.getStyles(Object.keys(defaultStyles))
         this.$dispatch(changeStyles(styles))
     }
 
     async resizeTable($resizer) {
         try {
+
             const data = await resizeHandler(this.$root, $resizer)
             this.$dispatch(tableResize(data))
         } catch (error) {
@@ -99,17 +97,18 @@ export class Table extends ExcelComponent {
         this.isMouseDown = true
         const $target = $(event.target)
 
-        if (shouldResize($target)) {
-            this.resizeTable($target)
-        } else if (isCell($target)) {
-            if (event.shiftKey) {
-                const cells = matrix($target, this.selection.current)
-                    .map((id) => this.$root.find(`[data-id="${id}"]`))
-                this.selection.selectGroup(cells)
-            } else {
-                this.selectCell($target)
+        if ($)
+            if (shouldResize($target)) {
+                this.resizeTable($target)
+            } else if (isCell($target)) {
+                if (event.shiftKey) {
+                    const cells = matrix($target, this.selection.current)
+                        .map((id) => this.$root.find(`[data-id="${id}"]`))
+                    this.selection.selectGroup(cells)
+                } else {
+                    this.selectCell($target)
+                }
             }
-        }
     }
 
     updateTextInStore(value) {

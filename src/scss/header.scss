@@ -1,5 +1,5 @@
 @import 'variables';
-@import 'mixin';
+@import 'mixins';
 
 
 .excel__header {
@@ -12,16 +12,17 @@
     padding: 10px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     .input {
         margin: 0;
-        padding: 10px 7px;
+        padding: 12px 7px;
         min-width: 1px;
         color: #000;
         border: 1px solid transparent;
         border-radius: 2px;
         height: 20px;
-        font-size: 18px;
+        font-size: 1.1rem;
         line-height: 22px;
         outline: none;
 

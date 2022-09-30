@@ -25,7 +25,7 @@ class Dom {
     }
 
     attr(name, value) {
-        if (value === '') {
+        if (!value) {
             this.$el.setAttribute(name, value)
             return this
         }
@@ -74,7 +74,6 @@ class Dom {
     get data() {
         return this.$el.dataset
     }
-
 
     find(selector) {
         return $(this.$el.querySelector(selector))
@@ -125,7 +124,6 @@ class Dom {
 export function $(selector) {
     return new Dom(selector)
 }
-
 $.create = (tagName, classes = '') => {
     const el = document.createElement(tagName)
     if (classes) {
