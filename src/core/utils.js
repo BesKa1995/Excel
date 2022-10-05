@@ -2,7 +2,6 @@ export function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-
 export function range(start, end) {
     //reversing values to get the correct range
     if (start > end) [start, end] = [end, start]
@@ -40,8 +39,7 @@ export function camelCasetoDashCase(str) {
 
 export function toInlineStyles(styles = {}) {
     return Object.keys(styles)
-        .map(key => `${camelCasetoDashCase(key)}:${styles[key]}`)
-        .join(';')
+        .map(key => `${camelCasetoDashCase(key)}:${styles[key]}`).join(';')
 }
 
 export function debounce(fn, wait) {
@@ -55,7 +53,7 @@ export function debounce(fn, wait) {
 }
 
 export function isValidSelector(selector) {
-    if (!selector || typeof selector !== 'string') {
+    if (!selector) {
         throw new Error('Selector is not provided in the Router')
     }
 }
