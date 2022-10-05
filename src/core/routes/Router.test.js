@@ -19,7 +19,7 @@ describe('Router:', () => {
     let router
     beforeEach(() => {
         $root = document.createElement('div')
-        router = new Router({
+        router = new Router($root, {
             dashboard: DashBoard,
             excel: ExcelPage
         })
