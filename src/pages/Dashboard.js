@@ -27,4 +27,8 @@ export class DashBoard extends Page {
         `)
     }
 
+    afterRender() {
+
+    }
+
 }

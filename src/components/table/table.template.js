@@ -28,6 +28,7 @@ function toCell(row, state) {
             ...defaultStyles,
             ...state.stylesState[id]
         })
+
         return `
             <div 
                  class="cell" 
@@ -56,7 +57,6 @@ function toColumn({ col, index, width }) {
       </div>
     </div>
   `
-
 }
 
 function createRow(index, content, state) {

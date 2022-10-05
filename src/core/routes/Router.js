@@ -1,6 +1,6 @@
-import { ActiveRoute } from "./ActiveRoute"
 import { isValidSelector } from "../utils"
 import { $ } from "../dom"
+import { ActiveRoute } from "./ActiveRoute"
 
 export class Router {
     constructor(selector, routes) {
