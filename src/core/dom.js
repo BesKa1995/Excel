@@ -20,7 +20,7 @@ class Dom {
     }
 
     append({ $el }) {
-        this.$el.appendChild($el)
+        this.$el.append($el)
         return this
     }
 
